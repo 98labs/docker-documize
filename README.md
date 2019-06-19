@@ -25,14 +25,60 @@ mkdir -p ~/srv/documize/postgresql/data/
 ```
 vi config.conf
 ```
+Here's a sample content of the configuration file:
+```
+[http]
+port = 3000
+#forcesslport = 433
+#cert = "selfcert/cert.pem"
+#key = "selfcert/key.pem"
+
+[database]
+type = "postgresql"
+connection = "host=db port=5432 sslmode=disable user=documize password=Ur*Xtr0ng*Passw0rd dbname=documizedb"
+
+# https://docs.documize.com/s/VzO9ZqMOCgABGyfW/installation-guides/d/V16L08ucxwABhZF6/installation-guide
+# If you do not provide a salt, Documize will generate a random secret and display what it is.
+# Copy the secret and use on subsequent Documize server restarts.
+# salt = "tsu3Acndky8cdTNx3"
+
+[install]
+location = "selfhost"
+```
+
 
 2.2 Edit docker-compose.yml
+Inspect the docker-compose.yml file.
+```
+version: "3.7"
+services:
 
-Specify the location of the configuration file. In the docker-compose example, the configuration is mounted from
+  db:
+    container_name: documizedb
+    image: postgres:9-alpine
+    environment:
+      POSTGRES_DB: documizedb
+      POSTGRES_PASSWORD: Ur*Xtr0ng*Passw0rd
+      POSTGRES_USER: documize
+    volumes:
+      - ~/srv/documize/postgresql/data/:/var/lib/postgresql/data/
+
+  documize:
+    container_name: documize
+    image: 98labs/documize:3.0.0
+    depends_on:
+      - db
+    volumes:
+      - ~/srv/documize/config.conf:/app/config.conf
+    ports:
+      - "3000:3000"
+```
+
+Specify the location of the configuration file. In the example above, the configuration is mounted from
 ```
 ~/srv/documize/config.conf
 ```
-Make sure the configuration file is present at the correct location.
+Make sure the configuration file is available at the correct location.
 
 3.0 Start the service
 ```
