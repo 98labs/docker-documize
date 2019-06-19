@@ -7,12 +7,7 @@
 git clone git@github.com:98labs/docker-documize.git &&  cd docker-documize
 ```
 
-1.1 Copy a sample configuration file from config-example.conf 
-```
-mv config-example.conf config.conf
-```
-
-1.2 Build the Docker image
+2.0 Build the Docker image
 ```
 docker build -t organization/documize .
 ```
@@ -26,17 +21,18 @@ mkdir -p ~/srv/documize/postgresql/data/
 
 2.0 Setup the configuration file
 
-2.1 Edit the configuration file with the database info
+2.1 Edit the configuration file with the correct database info
 ```
 vi config.conf
 ```
 
 2.2 Edit docker-compose.yml
 
-Specify the location of config.conf. In the docker-compose example, the configuration is mounted from
+Specify the location of the configuration file. In the docker-compose example, the configuration is mounted from
 ```
 ~/srv/documize/config.conf
 ```
+Make sure the configuration file is present at the correct location.
 
 3.0 Start the service
 ```
