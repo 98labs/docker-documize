@@ -38,7 +38,7 @@ Specify the location of config.conf. In the docker-compose example, the configur
 ~/srv/documize/config.conf
 ```
 
-2.3 Start the service
+3.0 Start the service
 ```
 docker-compose up
 ```
@@ -49,7 +49,7 @@ docker-compose up -d
 
 ## Cleanup
 
-3.0 Stop the service
+Stop the service
 ```
 docker-compose down
 ```
