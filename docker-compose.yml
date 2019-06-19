@@ -1,0 +1,22 @@
+version: "3.7"
+services:
+
+  db:
+    container_name: documizedb
+    image: postgres:9-alpine
+    environment:
+      POSTGRES_DB: documizedb
+      POSTGRES_PASSWORD: Ur*Xtr0ng*Passw0rd
+      POSTGRES_USER: documize
+    volumes:
+      - ~/srv/documize/postgresql/data/:/var/lib/postgresql/data/
+
+  documize:
+    container_name: documize
+    image: 98labs/documize:3.0.0
+    depends_on:
+      - db
+    volumes:
+      - ~/srv/documize/config.conf:/app/config.conf
+    ports:
+      - "3000:3000"
