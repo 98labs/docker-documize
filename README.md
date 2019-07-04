@@ -65,7 +65,7 @@ services:
 
   documize:
     container_name: documize
-    image: 98labs/documize:3.0.0
+    image: 98labs/documize:3.1.0
     depends_on:
       - db
     volumes:
