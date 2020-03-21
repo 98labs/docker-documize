@@ -9,7 +9,7 @@ git clone git@github.com:98labs/docker-documize.git &&  cd docker-documize
 
 2.0 Build the Docker image
 ```
-docker build -t organization/documize .
+docker build -t 98labs/documize:3.7.0 -t 98labs/documize:latest .
 ```
 
 ## Run the container via docker-compose
@@ -65,7 +65,7 @@ services:
 
   documize:
     container_name: documize
-    image: 98labs/documize:3.1.0
+    image: 98labs/documize:3.7.0
     depends_on:
       - db
     volumes:
