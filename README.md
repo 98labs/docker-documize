@@ -14,14 +14,19 @@ docker build -t 98labs/documize:3.7.0 -t 98labs/documize:latest .
 
 ## Run the container via docker-compose
 
-1.0 Create host volume for your PostgreSQL database
+1.0 Download the docker-compose.yml file
+```
+curl -sSL https://raw.githubusercontent.com/98labs/docker-documize/master/docker-compose.yml > docker-compose.yml
+```
+
+2.0 Create host volume for your PostgreSQL database
 ```
 mkdir -p ~/srv/documize/postgresql/data/
 ```
 
-2.0 Setup the configuration file
+3.0 Setup the configuration file
 
-2.1 Edit the configuration file with the correct database info
+3.1 Edit the configuration file with the correct database info
 ```
 vi config.conf
 ```
@@ -46,8 +51,7 @@ connection = "host=db port=5432 sslmode=disable user=documize password=Ur*Xtr0ng
 location = "selfhost"
 ```
 
-
-2.2 Edit docker-compose.yml
+3.2 Edit docker-compose.yml
 Inspect the docker-compose.yml file.
 ```
 version: "3.7"
@@ -80,7 +84,7 @@ Specify the location of the configuration file. In the example above, the config
 ```
 Make sure the configuration file is available at the correct location.
 
-3.0 Start the service
+4.0 Start the service
 ```
 docker-compose up
 ```
